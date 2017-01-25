@@ -65,3 +65,69 @@ sudo apt-get --yes install python-pip
 ## (Optional) Create and enter a virtual environment:
 # sudo apt-get install python-virtualenv
 # virtualenv env
+
+
+sudo pip install pyvirtualdisplay selenium pyOpenSSL
+
+sudo cpan make install
+sudo cpan install Bundle::CPAN
+sudo cpan install HTTP::Request
+sudo cpan install LWP::UserAgent
+sudo cpan install LWP::Protocol::https
+
+############################
+# Video codecs for firefox #
+############################
+### Fuente: http://www.webupd8.org/2014/04/10-things-to-do-after-installing-ubuntu.html
+
+sudo add-apt-repository ppa:mc3man/trusty-media
+sudo apt-get update
+sudo apt-get --yes install gstreamer0.10-ffmpeg
+
+#########################
+# Install Skype and fix #
+#########################
+sudo apt-get --yes install skype
+## Fix Skype not using the correct system theme on 64bit
+sudo apt-get --yes install gtk2-engines-murrine:i386 gtk2-engines-pixbuf:i386
+
+##################
+# Install sdkman #
+##################
+
+echo "Installing sdkman..."
+curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+echo "sdkman installed, now install grails."
+echo "Also install nvm (https://github.com/creationix/nvm) and node 0.12.5"
+
+##################
+# Install mysql  #
+##################
+
+echo "Preparing for install mysql sever"
+## Cleaning from before installations
+sudo rm /etc/mysql/my.cnf
+sudo rm /etc/alternatives/my.cnf
+sudo rm /etc/mysql/debian.cnf
+sudo rm -rf /var/lib/mysql*
+sudo rm -rf /etc/mysql/mysql.conf.d/
+sudo apt-get remove --purge mysql-server mysql-server-* mysql-server-core-* mysql-client mysql-client-* mysql-client-core-* mysql-common apparmor
+sudo apt-get autoremove
+sudo apt-get autoclean
+
+echo "Install mysql server and workbench"
+sudo apt-get install -y mysql-common
+sudo apt-get install -y mysql-server
+sudo apt-get install -y mysql-workbench
+
+##################
+# Clean up setup #
+##################
+
+echo "Cleaning Up" &&
+sudo apt-get -f install &&
+sudo apt-get autoremove &&
+sudo apt-get --yes autoclean &&
+sudo apt-get --yes clean
